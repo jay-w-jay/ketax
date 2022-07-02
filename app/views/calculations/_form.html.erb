@@ -1,0 +1,67 @@
+<%= form_with(model: calculation) do |form| %>
+  <% if calculation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(calculation.errors.count, "error") %> prohibited this calculation from being saved:</h2>
+
+      <ul>
+        <% calculation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :basic_pay %>
+    <%= form.text_field :basic_pay %>
+  </div>
+
+  <div class="field">
+    <%= form.label :allowances %>
+    <%= form.text_field :allowances %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gross_pay %>
+    <%= form.text_field :gross_pay %>
+  </div>
+
+  <div class="field">
+    <%= form.label :taxable_pay %>
+    <%= form.text_field :taxable_pay %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tax %>
+    <%= form.text_field :tax %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tax_relief %>
+    <%= form.text_field :tax_relief %>
+  </div>
+
+  <div class="field">
+    <%= form.label :paye %>
+    <%= form.text_field :paye %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nhif %>
+    <%= form.text_field :nhif %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nssf %>
+    <%= form.text_field :nssf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :net_pay %>
+    <%= form.text_field :net_pay %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

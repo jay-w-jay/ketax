@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Calculations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Basic pay</th>
+      <th>Allowances</th>
+      <th>Gross pay</th>
+      <th>Taxable pay</th>
+      <th>Tax</th>
+      <th>Tax relief</th>
+      <th>Paye</th>
+      <th>Nhif</th>
+      <th>Nssf</th>
+      <th>Net pay</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @calculations.each do |calculation| %>
+      <tr>
+        <td><%= calculation.basic_pay %></td>
+        <td><%= calculation.allowances %></td>
+        <td><%= calculation.gross_pay %></td>
+        <td><%= calculation.taxable_pay %></td>
+        <td><%= calculation.tax %></td>
+        <td><%= calculation.tax_relief %></td>
+        <td><%= calculation.paye %></td>
+        <td><%= calculation.nhif %></td>
+        <td><%= calculation.nssf %></td>
+        <td><%= calculation.net_pay %></td>
+        <td><%= link_to 'Show', calculation %></td>
+        <td><%= link_to 'Edit', edit_calculation_path(calculation) %></td>
+        <td><%= link_to 'Destroy', calculation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Calculation', new_calculation_path %>
