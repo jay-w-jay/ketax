@@ -4,6 +4,7 @@ class CalculationsController < ApplicationController
   # GET /calculations or /calculations.json
   def index
     @calculations = Calculation.all
+    redirect_to new_calculation_path
   end
 
   # GET /calculations/1 or /calculations/1.json
@@ -25,6 +26,7 @@ class CalculationsController < ApplicationController
 
     respond_to do |format|
       if @calculation.save
+        @calculation.recalculate
         format.html { redirect_to calculation_url(@calculation), notice: "Calculation was successfully created." }
         format.json { render :show, status: :created, location: @calculation }
       else
@@ -52,7 +54,7 @@ class CalculationsController < ApplicationController
     @calculation.destroy
 
     respond_to do |format|
-      format.html { redirect_to calculations_url, notice: "Calculation was successfully destroyed." }
+      format.html { redirect_to new_calculation_path, notice: "Calculation was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -11,6 +11,14 @@ class Calculation < ApplicationRecord
   validates :paye, presence: true
   validates :net_pay, presence: true
 
+  validate :validate_basic_pay
+
+  def validate_basic_pay
+    if basic_pay && basic_pay < 1
+      errors.add(:basic_pay, 'Basic pay must be greater than 1')
+    end
+  end
+
   def recalculate
     calculate_gross_pay
     calculate_nssf
