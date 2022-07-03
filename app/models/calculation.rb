@@ -8,7 +8,7 @@ class Calculation < ApplicationRecord
   validates :nhif, presence: true
   validates :nssf, presence: true
   validates :tax_relief, presence: true
-  validates :paye, presence: :true
+  validates :paye, presence: true
   validates :net_pay, presence: true
 
   def recalculate
