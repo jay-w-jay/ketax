@@ -1,6 +1,8 @@
 <h4>New Calculation</h4>
 
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-success" role="alert" id="notice"><%= notice %></div>
+<% end %>
 
 <%= render('body') %>
 

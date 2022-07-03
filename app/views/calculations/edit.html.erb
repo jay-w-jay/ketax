@@ -1,5 +1,7 @@
-<h1>Editing Calculation</h1>
+<h3>Editing Calculation</h3>
 
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-success" role="alert" id="notice"><%= notice %></div>
+<% end %>
 
 <%= render('body') %>
