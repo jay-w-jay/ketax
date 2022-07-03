@@ -40,6 +40,7 @@ class CalculationsController < ApplicationController
   def update
     respond_to do |format|
       if @calculation.update(calculation_params)
+        @calculation.recalculate
         format.html { redirect_to calculation_url(@calculation), notice: "Calculation was successfully updated." }
         format.json { render :show, status: :ok, location: @calculation }
       else

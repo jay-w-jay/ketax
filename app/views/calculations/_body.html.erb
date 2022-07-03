@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-4">
+    <%= render 'form', calculation: @calculation %>
+  </div>
+  <div class="col-8">
+    <dl class="row">
+      <dt class="col-sm-2">Basic Pay</dt>
+      <dd class="col-sm-10"><%= @calculation.basic_pay %></dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-2">Gross Pay</dt>
+      <dd class="col-sm-10"><%= @calculation.gross_pay %></dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-2">NSSF</dt>
+      <dd class="col-sm-10"><%= @calculation.nssf %></dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-2">Tax</dt>
+      <dd class="col-sm-10"><%= @calculation.tax %></dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-2">Tax Relief</dt>
+      <dd class="col-sm-10"><%= @calculation.basic_pay %></dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-2">PAYE</dt>
+      <dd class="col-sm-10"><%= @calculation.paye %></dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-2">NHIF</dt>
+      <dd class="col-sm-10"><%= @calculation.nhif %></dd>
+    </dl>
+
+    <dl class="row">
+      <dt class="col-sm-2">Net Pay</dt>
+      <dd class="col-sm-10"><%= @calculation.net_pay %></dd>
+    </dl>
+
+    <%= link_to 'New Calculation', new_calculation_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
+
+
