@@ -63,8 +63,14 @@
     </div>
 
     <div class="col-sm">
-      <h5>PAYE Brackets</h5>
+      <hr>
+      <h5>API</h5>
+      <p>Access this calculation using REST</p>
 
+      <p class="font-monospace text-muted"><%= "https://thetax.co.ke/api/v1/paye?basic_pay=#{@calculation.basic_pay}" %></p>
+      
+      <hr>
+      <h5>PAYE Brackets</h5>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -110,7 +116,7 @@
       <div>
         <h5>What is PAYE?</h5>
         <p>PAYE is the amount of tax you pay on your income. It is calculated by taking the tax rate and multiplying it by your taxable income.</p>
-
+        <hr>
         <h5>What is taxed?</h5>
         <p>The amount of income you pay into the tax system. This includes your basic pay, benefits, and other income.</p>
       </div>
