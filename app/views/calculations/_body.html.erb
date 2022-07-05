@@ -21,45 +21,99 @@
     <div class="col-sm">
       <dl class="row">
         <dt class="col-sm-2">Basic Pay</dt>
-        <dd class="col-sm-10"><%= number_with_precision(@calculation.basic_pay, presicion: 2, delimiter: ',') %></dd>
+        <dd class="col-sm-10"><%= number_with_precision(@calculation.basic_pay, precision: 2, delimiter: ',') %></dd>
       </dl>
 
       <dl class="row">
         <dt class="col-sm-2">Gross Pay</dt>
-        <dd class="col-sm-10"><%= number_with_precision(@calculation.gross_pay, presicion: 2, delimiter: ',') %></dd>
+        <dd class="col-sm-10"><%= number_with_precision(@calculation.gross_pay, precision: 2, delimiter: ',') %></dd>
       </dl>
 
       <dl class="row">
         <dt class="col-sm-2">NSSF</dt>
-        <dd class="col-sm-10"><%= number_with_precision(@calculation.nssf, presicion: 2, delimiter: ',') %></dd>
+        <dd class="col-sm-10"><%= number_with_precision(@calculation.nssf, precision: 2, delimiter: ',') %></dd>
       </dl>
 
       <dl class="row">
         <dt class="col-sm-2">Tax</dt>
-        <dd class="col-sm-10"><%= number_with_precision(@calculation.tax, presicion: 2, delimiter: ',') %></dd>
+        <dd class="col-sm-10"><%= number_with_precision(@calculation.tax, precision: 2, delimiter: ',') %></dd>
       </dl>
 
       <dl class="row">
         <dt class="col-sm-2">Tax Relief</dt>
-        <dd class="col-sm-10"><%= number_with_precision(@calculation.basic_pay, presicion: 2, delimiter: ',') %></dd>
+        <dd class="col-sm-10"><%= number_with_precision(@calculation.basic_pay, precision: 2, delimiter: ',') %></dd>
       </dl>
 
       <dl class="row">
         <dt class="col-sm-2">PAYE</dt>
-        <dd class="col-sm-10"><%= number_with_precision(@calculation.paye, presicion: 2, delimiter: ',') %></dd>
+        <dd class="col-sm-10"><%= number_with_precision(@calculation.paye, precision: 2, delimiter: ',') %></dd>
       </dl>
 
       <dl class="row">
         <dt class="col-sm-2">NHIF</dt>
-        <dd class="col-sm-10"><%= number_with_precision(@calculation.nhif, presicion: 2, delimiter: ',') %></dd>
+        <dd class="col-sm-10"><%= number_with_precision(@calculation.nhif, precision: 2, delimiter: ',') %></dd>
       </dl>
 
       <dl class="row">
         <dt class="col-sm-2">Net Pay</dt>
-        <dd class="col-sm-10"><%= number_with_precision(@calculation.net_pay, presicion: 2, delimiter: ',') %></dd>
+        <dd class="col-sm-10"><%= number_with_precision(@calculation.net_pay, precision: 2, delimiter: ',') %></dd>
       </dl>
 
       <%= link_to 'New Calculation', new_calculation_path, class: 'btn btn-secondary' %>
+    </div>
+
+    <div class="col-sm">
+      <h5>PAYE Brackets</h5>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Taxable Pay (Monthly)</th>
+            <th>Taxable Pay (Annual)</th>
+            <th>Tax Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0 - 12,298</td>
+            <td>0 - 147,580</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td>12,299 - 23,885</td>
+            <td>147,581 - 286,623</td>
+            <td>15%</td>
+          </tr>
+          <tr>
+            <td>23,886 - 35,472</td>
+            <td>286,624 - 425,666</td>
+            <td>30%</td>
+          </tr>
+          <tr>
+            <td>35,473 - 47,059</td>
+            <td>425,667 - 564,709</td>
+            <td>25%</td>
+          </tr>
+          <tr>
+            <td>More than 47,059</td>
+            <td>More than 564,709</td>
+            <td>30%</td>
+          </tr>
+          <tr>
+            <td>Tax relief: 2,400</td>
+            <td>Tax relief: 28,800</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <h5>What is PAYE?</h5>
+        <p>PAYE is the amount of tax you pay on your income. It is calculated by taking the tax rate and multiplying it by your taxable income.</p>
+
+        <h5>What is taxed?</h5>
+        <p>The amount of income you pay into the tax system. This includes your basic pay, benefits, and other income.</p>
+      </div>
     </div>
   </div>
 </div>
