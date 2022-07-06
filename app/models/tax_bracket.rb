@@ -1,0 +1,2 @@
+class TaxBracket < ApplicationRecord
+end
