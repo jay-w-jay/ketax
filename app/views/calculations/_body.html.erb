@@ -60,6 +60,49 @@
       </dl>
 
       <%= link_to 'New Calculation', new_calculation_path, class: 'btn btn-secondary' %>
+
+      <% if @calculation.tax > 0 %>
+        <hr>
+        <h5>Tax Calculation Breakdown</h5>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Tax Bracket</th>
+              <th>Rate</th>
+              <th>Amount Taxed</th>
+              <th>Tax</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @calculation.calculation_tax_brackets.all.each do |calc_tax_bracket| %>
+              <tr>
+                <td><%= number_with_precision(calc_tax_bracket.tax_bracket.min, precision: 2, delimiter: ',') %> - <%= number_with_precision(calc_tax_bracket.tax_bracket.human_max, precision: 2, delimiter: ',') %></td>
+                <td><%= number_with_precision(calc_tax_bracket.rate, precision: 0, delimiter: ',') %>%</td>
+                <td><%= number_with_precision(calc_tax_bracket.amount, precision: 2, delimiter: ',') %></td>
+                <td><%= number_with_precision(calc_tax_bracket.total, precision: 2, delimiter: ',') %></td>
+              </tr>
+            <% end %>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><b>Total Tax</b></td>
+              <td><%= number_with_precision(@calculation.tax, precision: 2, delimiter: ',') %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><b>Tax Relief</b></td>
+              <td><%= number_with_precision(@calculation.tax_relief, precision: 2, delimiter: ',') %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><b>PAYE</b></td>
+              <td><%= number_with_precision(@calculation.paye, precision: 2, delimiter: ',') %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
     </div>
 
     <div class="col-sm">
