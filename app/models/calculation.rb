@@ -1,4 +1,6 @@
 class Calculation < ApplicationRecord
+  has_many :calculation_tax_brackets, dependent: :destroy
+  has_many :tax_brackets, through: :calculation_tax_brackets
 
   validates :basic_pay, presence: true
   validates :allowances, presence: true
@@ -20,12 +22,14 @@ class Calculation < ApplicationRecord
   end
 
   def recalculate
+    save!
     calculate_gross_pay
     calculate_nssf
     calculate_taxable_pay
     calculate_tax_relief
+    generate_tax_brackets
     self.nhif = calculate_nhif
-    self.tax = calculate_tax(taxable_pay)
+    self.tax = calculate_tax
     calculate_paye
     calculate_net_pay
     save!
@@ -48,13 +52,8 @@ class Calculation < ApplicationRecord
     self.paye = 0 if paye.negative?
   end
 
-  def calculate_tax(taxable_pay)
-    tax = 0
-    tax = 0.1 * taxable_pay if taxable_pay <= 24_000
-    tax = (0.25 * (taxable_pay - 24_000)) + 2400 if 24_001 <= taxable_pay && taxable_pay <= 32_333
-    tax = (0.3 * (taxable_pay - 32_333)) + 2083.25 + 2400 if taxable_pay > 32_333
-    tax = 0 if tax < 1
-    tax.ceil
+  def calculate_tax
+    calculation_tax_brackets.sum(:total).ceil
   end
 
   def calculate_nssf
@@ -87,5 +86,20 @@ class Calculation < ApplicationRecord
 
   def calculate_net_pay
     self.net_pay = gross_pay - paye - nssf - nhif
+  end
+
+  def generate_tax_brackets
+    calculation_tax_brackets.destroy_all
+    TaxBracket.order(min: :asc).each do |bracket|
+      if taxable_pay > bracket.min
+        amount_to_use = [taxable_pay - bracket.min, bracket.max - bracket.min].min
+        calculation_tax_brackets.create(
+          tax_bracket: bracket,
+          amount: amount_to_use,
+          rate: bracket.rate,
+          total: amount_to_use * (bracket.rate / 100)
+        )
+      end
+    end
   end
 end

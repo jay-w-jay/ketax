@@ -1,4 +1,7 @@
 class TaxBracket < ApplicationRecord
+  has_many :calculation_tax_brackets, dependent: :destroy
+  has_many :calculations, through: :calculation_tax_brackets
+
   def human_max
     if max > 32_333.00
       '∞'

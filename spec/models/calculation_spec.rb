@@ -93,4 +93,35 @@ RSpec.describe Calculation, type: :model do
       end
     end
   end
+
+  describe 'tax brackets' do
+    context 'when basic pay is 70k' do
+      let!(:calculation) { create(:calculation, basic_pay: 70_000, allowances: 0) }
+      before do
+        calculation.recalculate
+      end
+
+      it 'should have 3 tax brackets' do
+        expect(calculation.tax_brackets.count).to eq(3)
+      end
+
+      it ': check first bracket' do
+        expect(calculation.calculation_tax_brackets.first.amount).to eq(24_000)
+        expect(calculation.calculation_tax_brackets.first.rate).to eq(10)
+        expect(calculation.calculation_tax_brackets.first.total).to eq(2_400)
+      end
+
+      it ': check second bracket' do
+        expect(calculation.calculation_tax_brackets.second.amount).to eq(8_333)
+        expect(calculation.calculation_tax_brackets.second.rate).to eq(25)
+        expect(calculation.calculation_tax_brackets.second.total).to eq(2_083.25)
+      end
+
+      it ': check third bracket' do
+        expect(calculation.calculation_tax_brackets.third.amount).to eq(37_467)
+        expect(calculation.calculation_tax_brackets.third.rate).to eq(30)
+        expect(calculation.calculation_tax_brackets.third.total).to eq(11_240.10)
+      end
+    end
+  end
 end
