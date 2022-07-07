@@ -80,37 +80,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>0 - 12,298</td>
-            <td>0 - 147,580</td>
-            <td>10%</td>
-          </tr>
-          <tr>
-            <td>12,299 - 23,885</td>
-            <td>147,581 - 286,623</td>
-            <td>15%</td>
-          </tr>
-          <tr>
-            <td>23,886 - 35,472</td>
-            <td>286,624 - 425,666</td>
-            <td>30%</td>
-          </tr>
-          <tr>
-            <td>35,473 - 47,059</td>
-            <td>425,667 - 564,709</td>
-            <td>25%</td>
-          </tr>
-          <tr>
-            <td>More than 47,059</td>
-            <td>More than 564,709</td>
-            <td>30%</td>
-          </tr>
-          <tr>
-            <td>Tax relief: 2,400</td>
-            <td>Tax relief: 28,800</td>
-            <td></td>
-          </tr>
-        </tbody>
+          <% TaxBracket.all.each do |bracket| %>
+            <tr>
+              <td><%= number_with_precision(bracket.min, precision: 2, delimiter: ',') %> - <%= number_with_precision(bracket.human_max, precision: 2, delimiter: ',') %></td>
+              <td><%= number_with_precision(bracket.annual_min, precision: 2, delimiter: ',') %> - <%= number_with_precision(bracket.annual_max, precision: 2, delimiter: ',') %></td>
+              <td><%= number_with_precision(bracket.rate, precision: 0, delimiter: ',') %>%</td>
+            </tr>
+          <% end %>
+        </tbody>        
       </table>
 
       <div>
