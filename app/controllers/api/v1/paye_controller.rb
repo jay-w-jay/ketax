@@ -12,6 +12,6 @@ class Api::V1::PayeController < Api::BaseController
       calculation = Calculation.create(basic_pay: basic_pay)
     end
     calculation.recalculate
-    render json: calculation
+    render json: calculation, include: [:calculation_tax_brackets => { :include => :tax_bracket }]
   end
 end
